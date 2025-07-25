@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabaseClient'
 import Auth from './components/Auth'
 import Chat from './components/Chat'
+import type { Session } from '@supabase/supabase-js' // Changed to type-only import
 
 function App() {
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {

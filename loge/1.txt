@@ -1,0 +1,149 @@
+src/App.tsx:11:18 - error TS2345: Argument of type 'Session | null' is not assignable to parameter of type 'SetStateAction<null>'.
+  Type 'Session' is not assignable to type 'SetStateAction<null>'.
+    Type 'Session' provides no match for the signature '(prevState: null): null'.
+
+11       setSession(session)
+                    ~~~~~~~
+
+src/App.tsx:15:18 - error TS2345: Argument of type 'Session | null' is not assignable to parameter of type 'SetStateAction<null>'.
+  Type 'Session' is not assignable to type 'SetStateAction<null>'.
+    Type 'Session' provides no match for the signature '(prevState: null): null'.
+
+15       setSession(session)
+                    ~~~~~~~
+
+src/components/Chat.tsx:1:8 - error TS6133: 'React' is declared but its value is never read.
+
+1 import React, { useState, useEffect, useRef } from 'react';
+         ~~~~~
+
+src/components/Chat.tsx:6:27 - error TS7031: Binding element 'content' implicitly has an 'any' type.
+
+6 const MessageContent = ({ content }) => {
+                            ~~~~~~~
+
+src/components/Chat.tsx:18:9 - error TS7034: Variable 'urls' implicitly has type 'any[]' in some locations where its type cannot be determined.
+
+18   const urls = [];
+           ~~~~
+
+src/components/Chat.tsx:19:48 - error TS6133: 'fullMatch' is declared but its value is never read.
+
+19   currentText = currentText.replace(urlRegex, (fullMatch, url) => {
+                                                  ~~~~~~~~~
+
+src/components/Chat.tsx:19:48 - error TS7006: Parameter 'fullMatch' implicitly has an 'any' type.
+
+19   currentText = currentText.replace(urlRegex, (fullMatch, url) => {
+                                                  ~~~~~~~~~
+
+src/components/Chat.tsx:19:59 - error TS7006: Parameter 'url' implicitly has an 'any' type.
+
+19   currentText = currentText.replace(urlRegex, (fullMatch, url) => {
+                                                             ~~~
+
+src/components/Chat.tsx:41:12 - error TS7005: Variable 'urls' implicitly has an 'any[]' type.
+
+41           {urls.map((url, index) => (
+              ~~~~
+
+src/components/Chat.tsx:67:29 - error TS2339: Property 'scrollIntoView' does not exist on type 'never'.
+
+67     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+                               ~~~~~~~~~~~~~~
+
+src/components/Chat.tsx:85:26 - error TS2345: Argument of type '{ id: any; title: any; created_at: any; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '{ id: any; title: any; created_at: any; }[]' is not assignable to type 'never[]'.
+    Type '{ id: any; title: any; created_at: any; }' is not assignable to type 'never'.
+
+85         setConversations(data);
+                            ~~~~
+
+src/components/Chat.tsx:110:43 - error TS7006: Parameter 'conversationId' implicitly has an 'any' type.
+
+110   const handleSelectConversation = async (conversationId) => {
+                                              ~~~~~~~~~~~~~~
+
+src/components/Chat.tsx:122:19 - error TS2345: Argument of type '{ id: any; role: any; content: any; created_at: any; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '{ id: any; role: any; content: any; created_at: any; }[]' is not assignable to type 'never[]'.
+    Type '{ id: any; role: any; content: any; created_at: any; }' is not assignable to type 'never'.
+
+122       setMessages(data);
+                      ~~~~
+
+src/components/Chat.tsx:127:36 - error TS7006: Parameter 'e' implicitly has an 'any' type.
+
+127   const handleSendMessage = async (e) => {
+                                       ~
+
+src/components/Chat.tsx:132:17 - error TS2345: Argument of type '(prevMessages: never[]) => { role: string; content: string; created_at: string; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '(prevMessages: never[]) => { role: string; content: string; created_at: string; }[]' is not assignable to type '(prevState: never[]) => never[]'.
+    Type '{ role: string; content: string; created_at: string; }[]' is not assignable to type 'never[]'.
+      Type '{ role: string; content: string; created_at: string; }' is not assignable to type 'never'.
+
+132     setMessages((prevMessages) => [...prevMessages, userMessage]);
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Chat.tsx:160:26 - error TS2345: Argument of type '(prev: never[]) => any[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '(prev: never[]) => any[]' is not assignable to type '(prevState: never[]) => never[]'.
+    Type 'any[]' is not assignable to type 'never[]'.
+      Type 'any' is not assignable to type 'never'.
+
+160         setConversations((prev) => [newConversation, ...prev]);
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Chat.tsx:191:19 - error TS2345: Argument of type '(prevMessages: never[]) => { role: string; content: string; created_at: string; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '(prevMessages: never[]) => { role: string; content: string; created_at: string; }[]' is not assignable to type '(prevState: never[]) => never[]'.
+    Type '{ role: string; content: string; created_at: string; }[]' is not assignable to type 'never[]'.
+      Type '{ role: string; content: string; created_at: string; }' is not assignable to type 'never'.
+
+191       setMessages((prevMessages) => [...prevMessages, aiMessage]);
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Chat.tsx:217:28 - error TS7006: Parameter 'timestamp' implicitly has an 'any' type.
+
+217   const formatTimestamp = (timestamp) => {
+                               ~~~~~~~~~
+
+src/components/Chat.tsx:238:27 - error TS2339: Property 'id' does not exist on type 'never'.
+
+238                 key={conv.id}
+                              ~~
+
+src/components/Chat.tsx:239:130 - error TS2339: Property 'id' does not exist on type 'never'.
+
+239                 className={`w-full text-left py-1.5 px-3 rounded-md flex items-center space-x-2 ${currentConversationId === conv.id ? 'bg-gray-700' : 'hover:bg-gray-700'
+                                                                                                                                     ~~
+
+src/components/Chat.tsx:241:62 - error TS2339: Property 'id' does not exist on type 'never'.
+
+241                 onClick={() => handleSelectConversation(conv.id)}
+                                                                 ~~
+
+src/components/Chat.tsx:244:58 - error TS2339: Property 'title' does not exist on type 'never'.
+
+244                 <span className="text-sm truncate">{conv.title}</span>
+                                                             ~~~~~
+
+src/components/Chat.tsx:267:38 - error TS2339: Property 'role' does not exist on type 'never'.
+
+267               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                         ~~~~
+
+src/components/Chat.tsx:270:78 - error TS2339: Property 'role' does not exist on type 'never'.
+
+270                 className={`max-w-[70%] px-4 py-3 rounded-xl shadow-md ${msg.role === 'user'
+                                                                                 ~~~~
+
+src/components/Chat.tsx:275:46 - error TS2339: Property 'content' does not exist on type 'never'.
+
+275                 <MessageContent content={msg.content} />
+                                                 ~~~~~~~
+
+src/components/Chat.tsx:276:91 - error TS2339: Property 'created_at' does not exist on type 'never'.
+
+276                 <p className="text-xs text-gray-300 mt-1 text-right">{formatTimestamp(msg.created_at)}</p>
+                                                                                              ~~~~~~~~~~
+
+
+Found 26 errors.

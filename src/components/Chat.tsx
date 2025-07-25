@@ -2,21 +2,35 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { PaperAirplaneIcon, PlusIcon, UserCircleIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/solid';
 
+interface Message {
+  id?: string;
+  role: 'user' | 'assistant';
+  content: string;
+  created_at: string;
+}
+
+interface Conversation {
+  id: string;
+  title: string;
+  created_at: string;
+  user_id?: string; // Optional, as it's used for insertion
+}
+
 // Helper component to render message content with formatting
-const MessageContent = ({ content }) => {
+const MessageContent: React.FC<{ content: string }> = ({ content }) => {
   // Regex to find **bold** text
   const boldRegex = /\*\*(.*?)\*\*/g;
   // Regex to find URLs within parentheses: (https://example.com)
   const urlRegex = /\((https?:\/\/[^\s]+)\)/g;
 
-  const parts = [];
+  const parts: (string | JSX.Element)[] = [];
   let currentText = content;
   let lastIndex = 0;
   let match;
 
   // First, process URLs and replace them with a placeholder or remove them from the main text
-  const urls = [];
-  currentText = currentText.replace(urlRegex, (fullMatch, url) => {
+  const urls: string[] = [];
+  currentText = currentText.replace(urlRegex, (_fullMatch: string, url: string) => { // _fullMatch to ignore
     urls.push(url);
     return ''; // Remove the URL and its parentheses from the main text for bold processing
   });
@@ -56,12 +70,12 @@ const MessageContent = ({ content }) => {
 };
 
 const Chat = () => {
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]); // { id, role: 'user' | 'assistant', content: string, created_at }
-  const [conversations, setConversations] = useState([]); // { id, title, created_at }
-  const [currentConversationId, setCurrentConversationId] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const [message, setMessage] = useState<string>('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -82,8 +96,8 @@ const Chat = () => {
       if (error) {
         console.error('Error fetching conversations:', error);
       } else {
-        setConversations(data);
-        if (data.length > 0) {
+        setConversations(data as Conversation[]);
+        if (data && data.length > 0) {
           // Load the most recent conversation by default
           handleSelectConversation(data[0].id);
         } else {
@@ -107,7 +121,7 @@ const Chat = () => {
     setMessage('');
   };
 
-  const handleSelectConversation = async (conversationId) => {
+  const handleSelectConversation = async (conversationId: string) => {
     setCurrentConversationId(conversationId);
     setLoading(true);
     const { data, error } = await supabase
@@ -119,16 +133,16 @@ const Chat = () => {
     if (error) {
       console.error('Error fetching messages:', error);
     } else {
-      setMessages(data);
+      setMessages(data as Message[]);
     }
     setLoading(false);
   };
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim() === '') return;
 
-    const userMessage = { role: 'user', content: message, created_at: new Date().toISOString() };
+    const userMessage: Message = { role: 'user', content: message, created_at: new Date().toISOString() };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setMessage('');
     setLoading(true);
@@ -157,7 +171,7 @@ const Chat = () => {
         if (convError) throw convError;
         conversationIdToUse = newConversation.id;
         setCurrentConversationId(newConversation.id);
-        setConversations((prev) => [newConversation, ...prev]);
+        setConversations((prev) => [newConversation as Conversation, ...prev]);
       }
 
       // Save user message to DB
@@ -186,7 +200,7 @@ const Chat = () => {
       }
 
       const aiResponseContent = await response.text();
-      const aiMessage = { role: 'assistant', content: aiResponseContent, created_at: new Date().toISOString() };
+      const aiMessage: Message = { role: 'assistant', content: aiResponseContent, created_at: new Date().toISOString() };
 
       setMessages((prevMessages) => [...prevMessages, aiMessage]);
 
@@ -214,7 +228,7 @@ const Chat = () => {
     }
   };
 
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     return date.toLocaleString('ko-KR', { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   };
