@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Removed @import url for Google Fonts to fix PostCSS warning */
+
+body {
+  font-family: 'Inter', sans-serif; /* Assuming Inter font is available or will be handled by browser */
+  background-color: #202123; /* Darker background */
+  color: #ececec; /* Lighter text for contrast */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-widget {
+  background-color: #282828;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #e0e0e0;
+}
+
+.form-widget .header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.form-widget .description {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #b0b0b0;
+  text-align: center;
+}
+
+.form-widget input[type="email"],
+.form-widget input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+.form-widget input[type="email"]:focus,
+.form-widget input[type="password"]:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+.form-widget button.button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form-widget button.button:hover {
+  background-color: #4f46e5;
+}
+
+.form-widget button.button:disabled {
+  background-color: #4f46e5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-widget .link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.form-widget .link:hover {
+  text-decoration: underline;
+}
+
+/* Auth UI specific overrides */
+.sbui-auth-ui .sbui-button {
+  background-color: #6366f1 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  padding: 12px 20px !important;
+  transition: background-color 0.2s ease-in-out !important;
+}
+
+.sbui-auth-ui .sbui-button:hover {
+  background-color: #4f46e5 !important;
+}
+
+.sbui-auth-ui .sbui-input {
+  background-color: #333 !important;
+  border: 1px solid #444 !important;
+  color: #e0e0e0 !important;
+  padding: 12px 15px !important;
+  border-radius: 6px !important;
+}
+
+.sbui-auth-ui .sbui-input:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5) !important;
+}
+
+.sbui-auth-ui .sbui-text-sm {
+  color: #b0b0b0 !important;
+}
+
+.sbui-auth-ui .sbui-link {
+  color: #6366f1 !important;
+}
+
+/* Custom Scrollbar for Chat */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #2d2d2d;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Chat specific styles */
+.chat-message-user {
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.chat-message-assistant {
+  background-color: #4b5563; /* gray-600 */
+  color: white;
+  border-bottom-left-radius: 0;
+}
+
+.chat-message-user,
+.chat-message-assistant {
+  border-radius: 0.75rem; /* rounded-lg */
+  padding: 0.75rem 1rem; /* px-4 py-2 */
+  max-width: 75%; /* max-w-2xl */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+}
